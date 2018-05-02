@@ -2,15 +2,15 @@ from flask import Flask, json, Response, request
 from PASS import main as pass_main
 from PASS import matches
 
-app = Flask(__name__)
+application = Flask(__name__)
 
 
-@app.route('/')
+@application.route('/')
 def hello():
     return 'Hello world!'
 
 
-@app.route('/get_demo')
+@application.route('/get_demo')
 def get_demo():
     print('PASS starting...')
     data = pass_main(['/Users/stasiuz/PASS/InfoXMLs/ACH_FCD_19122015_goal.xml', 'y'])
@@ -20,7 +20,7 @@ def get_demo():
     return json_response(data)
 
 
-@app.route('/get_matches')
+@application.route('/get_matches')
 def get_matches():
     print('Getting all available matches...')
     data = matches()
@@ -29,7 +29,7 @@ def get_matches():
     return json_response(data)
 
 
-@app.route('/get_summary')
+@application.route('/get_summary')
 def get_summary():
     file = request.args.get('file')
     data = pass_main(['/Users/stasiuz/PASS/InfoXMLs/' + file, 'y'])
@@ -49,4 +49,4 @@ def json_response(data):
 
 if __name__ == '__main__':
     print('REST service is starting...')
-    app.run()
+    application.run()

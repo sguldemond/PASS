@@ -1,0 +1,6 @@
+gunicorn
+Flask
+beautifulsoup4
+xlrd
+numpy
+lxml
