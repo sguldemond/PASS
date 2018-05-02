@@ -4,6 +4,8 @@ import os
 import sys
 import pickle
 from Info_dict_module import InfoDict
+import glob
+
 
 def main(file, savestate='n'):
     templatetexthome, templatetextaway, templatedict = TopicWalk(file)
@@ -12,6 +14,9 @@ def main(file, savestate='n'):
     print(templatetextaway)
     print(templatedict)
     print(infodict)
+
+    data = {'meta': infodict, 'content': templatedict}
+
     if savestate == 'y':
         newfile = os.path.splitext(os.path.basename(file))[0]
         newfile = re.sub(r'goal', '', newfile)
@@ -32,7 +37,30 @@ def main(file, savestate='n'):
             print(newfile + 'infodict.p saved')
             pickle.dump(infodict, f)
 
-main('./InfoXMLs/VVV_FCEM_22042016_goal.xml', 'y')
+    return data
+
+
+def matches():
+    matches = []
+    xml_files = glob.glob('InfoXMLs/*.xml')
+    i = 0
+    for file in xml_files:
+        if i == 10:
+            break
+        data = {}
+        data['file'] = os.path.basename(file)
+        data['info'] = InfoDict(file)
+
+        matches.append(data)
+        i = i + 1
+
+    # TODO: sort matches by date
+    return matches
+
+
+print(matches())
+
+# main('./InfoXMLs/VVV_FCEM_22042016_goal.xml', 'y')
 
 #if __name__ == '__main__':
     #main(sys.argv[1:])
