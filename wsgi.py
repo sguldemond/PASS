@@ -1,8 +1,10 @@
 from flask import Flask, json, Response, request
+from flask_sslify import SSLify
 from PASS import main as pass_main
 from PASS import matches
 
 application = Flask(__name__)
+SSLify(application)
 
 
 @application.route('/')
