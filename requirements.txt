@@ -1,5 +1,6 @@
 gunicorn
 Flask
+Flask-SSLify
 beautifulsoup4
 xlrd
 numpy
