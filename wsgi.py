@@ -4,7 +4,7 @@ from PASS import main as pass_main
 from PASS import matches
 
 application = Flask(__name__)
-SSLify(application)
+# SSLify(application)
 
 
 @application.route('/')
